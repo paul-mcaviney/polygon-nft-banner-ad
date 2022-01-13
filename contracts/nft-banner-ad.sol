@@ -2,11 +2,11 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 
-contract NFTBannerAd is Ownable, ERC721 {
+contract NFTBannerAd is Ownable, ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
@@ -16,11 +16,27 @@ contract NFTBannerAd is Ownable, ERC721 {
         console.log("This is a WIP NFT Banner Ad contract");
     }
 
+    // A Function to create the NFT
+    // TODO: make this payable and set a require statement to proceed
+    function createNFT() public {        
+        // Get current tokenId
+        uint256 newItemId = _tokenIdCounter.current();
+
+        // mint the NFT
+        _safeMint(msg.sender, newItemId);
+
+        // Set the NFTs data
+        _setTokenURI(newItemId, "NFT_METADATA");
+
+        // Increment Counter for next NFT
+        _tokenIdCounter.increment();
+    }
+
     
 }
 
 // TODO: 1st - make contract to mint the NFT
-// TODO: 2nd - make nft upgradeable
+// TODO: 2nd - make nft upgradeable - user can pay an amount to update the image or text on the ad
 
 
 // will mint an nft to be displayed as a banner on my website
