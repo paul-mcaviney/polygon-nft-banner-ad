@@ -36,6 +36,7 @@ contract NFTBannerAd is Ownable, ERC721URIStorage {
 }
 
 // TODO: 1st - make contract to mint the NFT
+// TODO: Change the image link in the metadata json
 // TODO: 2nd - make nft upgradeable - user can pay an amount to update the image or text on the ad
 
 
@@ -46,5 +47,8 @@ contract NFTBannerAd is Ownable, ERC721URIStorage {
 
 // needs a function to mint the nft
 // needs a function to update the ad text for the next nft
-// needs a function to withdraw the funds < onlyOwner >
-// 
+// needs a function to withdraw the funds < onlyOwner > 
+
+// The idea of this project is to create an NFT in a specified size to be displayed on my website.
+// Any user can pay to replace the current NFT at a specified price
+// All the previous NFTs can still be viewed by following a link but only the most recent one will be featured
