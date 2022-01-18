@@ -14,7 +14,7 @@ contract NFTBannerAd is Ownable, ERC721URIStorage {
     // must be approved to get displayed on my site
     event NFTBeingMinted(uint256 tokenId); // Will need to figure this out
 
-    event NewNFTMinted(address sender, uint256 tokenId);    // DO I need token Id if it is the same NFT?
+    event NewNFTMinted(address sender, uint256 tokenId);
 
     constructor() ERC721("NFTBannerAd", "BA") {
         console.log("This is a WIP NFT Banner Ad contract");
@@ -27,7 +27,7 @@ contract NFTBannerAd is Ownable, ERC721URIStorage {
         uint256 newItemId = _tokenIdCounter.current();
 
         // will need to get the NFT metadata / image url before minting
-        // function getMetaData(string memory metaDatas) {}
+        // function getMetaData(string memory metaData) {}
 
         // mint the NFT
         _safeMint(msg.sender, newItemId);
