@@ -10,6 +10,10 @@ contract NFTBannerAd is Ownable, ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
+    // maybe an event to say an nft is in the process of being minted
+    // must be approved to get displayed on my site
+    event NFTBeingMinted(uint256 tokenId); // Will need to figure this out
+
     event NewNFTMinted(address sender, uint256 tokenId);    // DO I need token Id if it is the same NFT?
 
     constructor() ERC721("NFTBannerAd", "BA") {
@@ -22,14 +26,23 @@ contract NFTBannerAd is Ownable, ERC721URIStorage {
         // Get current tokenId
         uint256 newItemId = _tokenIdCounter.current();
 
+        // will need to get the NFT metadata / image url before minting
+        // function getMetaData(string memory metaDatas) {}
+
         // mint the NFT
         _safeMint(msg.sender, newItemId);
 
         // Set the NFTs data
         _setTokenURI(newItemId, "NFT_METADATA");
+        console.log("NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
 
         // Increment Counter for next NFT
         _tokenIdCounter.increment();
+    }
+
+    function approveNFT() private onlyOwner returns (bool) {
+        // might be better to do this in javascript from an alert from the website
+        // owner of contract signs a message which changes a bool to true
     }
 
     
@@ -37,6 +50,7 @@ contract NFTBannerAd is Ownable, ERC721URIStorage {
 
 // TODO: 1st - make contract to mint the NFT
 // TODO: Change the image link in the metadata json
+// TODO: Make minting of NFT only possible after approval
 // TODO: 2nd - make nft upgradeable - user can pay an amount to update the image or text on the ad
 
 
